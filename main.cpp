@@ -4,6 +4,8 @@
 #include <time.h>
 #include "c_BSTree.h"
 
+#define TOTAL_ELEMENTOS 5000
+
 using namespace std;
 
 c_BSTree<int> tree;
@@ -11,8 +13,8 @@ c_BSTree<int> tree;
 void* inserta (void* elem){
 
 	int *datos= (int *)elem;
-	for(int i=1; i<=100; ++i){
-		tree.p_my_insert(datos[i], datos[0]);
+	for(int i = 1; i <= TOTAL_ELEMENTOS; ++i){
+		tree.my_insert(datos[i], datos[0]);
 	}
 }
 
@@ -20,10 +22,10 @@ int main()
 {
 
 	int tam;
-	contador=0;
-	cont_col=0;
+	insertados = 0;
+	repetidos = 0;
 	srand(time(NULL));
-	tam=7;
+	tam = 4;
 /*int elementos[tam];
 	elementos[0] = 5;
 	elementos[1] = 6;
@@ -52,11 +54,11 @@ int main()
 
 	for (int i = 0; i < tam; ++i) {
 
-		int elementos[101];
-		elementos[0] = i;		//my_rank
+		int elementos[TOTAL_ELEMENTOS + 1];
+		elementos[0] = i;				//my_rank
 
-		for(int i = 1; i <= 100; ++i){	//100 elementos
-			elementos[i] = rand() % 100000;
+		for(int j = 1; j <= TOTAL_ELEMENTOS; ++j){	//100 elementos
+			elementos[j] = rand() % 100000;
 		}
 
 		flag[i] = true;
@@ -102,9 +104,9 @@ int main()
 	tree.print(tree.root);
 */
 
-	cout<<endl<<"Impresion por niveles: "<<endl;
-	tree.print_bfs();
-	cout<<endl<<"cont: "<<contador<<" "<<cont_col<<endl;
+	// cout<<endl<<"Impresion por niveles: "<<endl;
+	// tree.print_bfs();
+	cout<<endl<<"cont: "<<insertados<<" "<<repetidos<<endl;
 
 	return 0;
 }
