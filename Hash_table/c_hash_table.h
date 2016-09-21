@@ -1,0 +1,61 @@
+#ifndef C_HASH_TABLE_H
+#define C_HASH_TABLE_H
+
+#include <iostream>
+using namespace std;
+
+template <class T, class F, class E>
+
+class c_Hash_Table
+{
+
+public:
+    c_Hash_Table(int n){
+
+        m_size=n;
+        m_table=new E[m_size];
+    }
+    E *m_table;
+    F m_f;
+    int m_size;
+
+    void insert(T x){
+
+        //cout<<"h"<<endl;
+        cout<<"INSERTANDO "<<x<<endl;
+        int id=m_f(x,m_size);
+        //cout<<"     INSERTANDO EN: "<<id<<endl;
+        return m_table[id].insert(x);
+    }
+    bool remove(T x){
+
+        int id=m_f(x,m_size);
+        return m_table[id].remove(x);
+    }
+    bool find(T x){
+
+        //cout<<"h"<<endl;
+        int id=m_f(x,m_size);
+        return m_table[id].find(x);
+    }
+    void imprimir(){
+
+        for(int i=0; i<m_size; i++){
+
+            m_table[i].print();
+        }
+    }
+    int colisiones(){
+
+        int col=0;
+        for(int i=0; i<m_size; i++){
+
+            if(m_table[i].get_col()==0) ++col;
+            cout<<m_table[i].get_col()<<",";
+        }
+        cout<<endl;
+        return col;
+    }
+};
+
+#endif // C_HASH_TABLE_H

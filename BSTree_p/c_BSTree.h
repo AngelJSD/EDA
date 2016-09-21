@@ -10,6 +10,7 @@ using namespace std;
 static bool* flag;
 static int insertados;
 static int repetidos;
+static int col;
 
 struct arg_struct {
 	void* arg1;
@@ -45,11 +46,13 @@ c_Node<T>** c_BSTree<T>::my_find(T data, c_Node<T>*& ant){
 
 	for(; *it != nullptr && (*it)->data != data; ant = *it, it = &(*it)->hijos[(*it)->data < data] ){
 
-		while( (*it)->lock );		//Buclea mientras el nodo está ocupado :v
+		//while( (*it)->lock );		//Buclea mientras el nodo está ocupado :v
+		//while( (*it)->lock );
 
 	}
 	if(ant){
-		ant->lock = true;
+		//ant->lock = true;
+		pthread_mutex_lock(&(ant->m_mutex));
 	}
 	return it;
 }
@@ -71,9 +74,12 @@ void c_BSTree<T>::my_insert(T data, int rank){
 		*it = new c_Node<T>(data);
 		++insertados;
 	}
-
+	//if ( (*it) && (*it)->data != data){
+		++col;
+	//}
 	if(ant) {
-		ant->lock = false;
+		//ant->lock = false;
+		pthread_mutex_unlock(&(ant->m_mutex));
 	}
 
 }

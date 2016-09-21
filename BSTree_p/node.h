@@ -14,4 +14,5 @@ struct c_Node{
 
 	T data;
 	bool lock;
+	pthread_mutex_t m_mutex;
 };

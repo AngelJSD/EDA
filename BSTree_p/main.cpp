@@ -106,7 +106,7 @@ int main()
 
 	// cout<<endl<<"Impresion por niveles: "<<endl;
 	// tree.print_bfs();
-	cout<<endl<<"cont: "<<insertados<<" "<<repetidos<<endl;
+	cout<<endl<<"cont: "<<insertados<<" "<<repetidos<<" "<<col<<endl;
 
 	return 0;
 }
