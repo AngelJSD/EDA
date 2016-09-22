@@ -20,13 +20,13 @@ template <class T>
 struct Cless
 {
     inline bool operator()(T a, T b)
-        return a<b;
+    {   return a<b;}
 };
 template <class T>
 struct Cgreater
 {
     inline bool operator()(T a, T b)
-        return a>b;
+    {   return a>b;}
 };
 
 template <class T>
@@ -54,7 +54,7 @@ class SparseMatrix
         //nodo donde se va a insertar horizontalmente
         if(x>(*q)->m_x) Cgreater<T> cmp;
         else Cless<T> cmp;
-        for(;(*q) && x!=(*q)->m_x && cmp(x,(*q)->m_x && ( (*q)->m_horizontal[x>(*q)->m_x] ) ; q=&(*q)->m_horizontal[x>(*q)->m_x]);
+        for(;(*q) && x!=(*q)->m_x && cmp(x,(*q)->m_x) && (*q)->m_horizontal[x>(*q)->m_x]  ; q=&(*q)->m_horizontal[x>(*q)->m_x]);
         if((*q)->m_x==x )return 1;
         return 0;
     }
