@@ -16,16 +16,14 @@ struct CNODE
     }
 };
 
-template <class T>
 struct Cless
 {
-    inline bool operator()(T a, T b)
+    inline bool operator()(int a, int b)
     {   return a<b;}
 };
-template <class T>
 struct Cgreater
 {
-    inline bool operator()(T a, T b)
+    inline bool operator()(int a, int b)
     {   return a>b;}
 };
 
@@ -42,8 +40,8 @@ class SparseMatrix
     {
         cout<<"buscando Y "<<(*p)->m_y<<endl;
         //nodo donde se va a insertar verticalmente
-        if(y>(*p)->m_y) Cgreater<T> cmp;
-        else Cless<T> cmp;
+        if(y>(*p)->m_y) Cgreater cmp;
+        else Cless cmp;
         for(;(*p) && y!=(*p)->m_y && cmp(y,(*p)->m_y) && ( (*p)->m_vertical[y>(*p)->m_y] ) ; p=&(*p)->m_vertical[y>(*p)->m_y]);
         if((*p) && (*p)->m_y==y)return 1;
         return 0;
@@ -52,11 +50,12 @@ class SparseMatrix
     {
         cout<<"buscando X"<<endl;
         //nodo donde se va a insertar horizontalmente
-        if(x>(*q)->m_x) Cgreater<T> cmp;
-        else Cless<T> cmp;
+        if(x>(*q)->m_x) Cgreater cmp;
+        else Cless cmp;
         for(;(*q) && x!=(*q)->m_x && cmp(x,(*q)->m_x) && (*q)->m_horizontal[x>(*q)->m_x]  ; q=&(*q)->m_horizontal[x>(*q)->m_x]);
         if((*q)->m_x==x )return 1;
         return 0;
+
     }
     bool m_find(int x,int y, CNODE<T>** &p,CNODE<T>** &q)
     {
