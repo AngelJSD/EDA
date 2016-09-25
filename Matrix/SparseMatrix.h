@@ -167,17 +167,36 @@ class SparseMatrix
 			return 1;
 
 		}
-		else if( (*p)->m_y != y && (*p)->m_x == x ){
-			tmp->m_vertical[ y > (*p)->m_y ] = (*p)->m_vertical[ y > (*p)->m_y ];
-			if( tmp->m_vertical[ y > (*p)->m_y ] ){
-				tmp->m_vertical[ y > (*p)->m_y ]->m_vertical[ y < (*p)->m_y ] = tmp;
+		else if( (*p)->m_y != y && (*q)->m_x == x ){
+
+			tmp->m_vertical[ y > (*q)->m_y ] = (*q)->m_vertical[ y > (*q)->m_y ];
+			if( tmp->m_vertical[ y > (*q)->m_y ] ){
+				tmp->m_vertical[ y > (*q)->m_y ]->m_vertical[ y < (*q)->m_y ] = tmp;
 			}
-			(*p)->m_vertical[ y > (*p)->m_y ] = tmp;
-			tmp->m_vertical[ y < (*p)->m_y ] = (*p);
+			(*q)->m_vertical[ y > (*q)->m_y ] = tmp;
+			tmp->m_vertical[ y < (*q)->m_y ] = (*q);
 
+
+			CNODE<T>* tmp_y = new CNODE<T>( (*p)->m_x, y, '-');
+
+			tmp_y->m_vertical[ y > (*p)->m_y ] = (*p)->m_vertical[ y > (*p)->m_y ];
+			if( tmp_y->m_vertical[ y > (*p)->m_y ] ){
+				tmp_y->m_vertical[ y > (*p)->m_y ]->m_vertical[ y < (*p)->m_y ] = tmp_y;
+			}
+			(*p)->m_vertical[ y > (*p)->m_y ] = tmp_y;
+			tmp_y->m_vertical[ y < (*p)->m_y ] = (*p);
+
+			p = &(*p)->m_vertical[ y > (*p)->m_y ];
+
+			tmp->m_horizontal[ x > (*p)->m_x ] = (*p)->m_horizontal[ x > (*p)->m_x ];
+			if( tmp->m_horizontal[ x > (*p)->m_x ] ){
+				tmp->m_horizontal[ x > (*p)->m_x ]->m_horizontal[ x < (*p)->m_x ] = tmp;
+			}
+			(*p)->m_horizontal[ x > (*p)->m_x ] = tmp;
+			tmp->m_horizontal[ x < (*p)->m_x ] = (*p);
+
+			return 1;
 		}
-
-		return 1;
 	}
 
 	void print(){
