@@ -32,13 +32,14 @@ class SparseMatrix
 		// cout<<"buscando Y "<<(*p)->m_y<<endl;
 		//nodo donde se va a insertar verticalmente
 		if( y > (*p)->m_y ){
+
 			Cgreater cmp;
-			for( ; (*p) && y != (*p)->m_y && cmp(y,(*p)->m_y) && ( (*p)->m_vertical[y>(*p)->m_y] ) ; p = &(*p)->m_vertical[y>(*p)->m_y]){
+			for( ; (*p) && y != (*p)->m_y && ( (*p)->m_vertical[y>(*p)->m_y] ) && cmp(y,(*p)->m_vertical[y>(*p)->m_y]->m_y) ; p = &(*p)->m_vertical[y>(*p)->m_y]){
 			}
 		}
 		else{
 			Cless cmp;
-			for( ; (*p) && y != (*p)->m_y && cmp(y,(*p)->m_y) && ( (*p)->m_vertical[y>(*p)->m_y] ) ; p = &(*p)->m_vertical[y>(*p)->m_y]);
+			for( ; (*p) && y != (*p)->m_y && ( (*p)->m_vertical[y>(*p)->m_y] ) && cmp(y,(*p)->m_vertical[y>(*p)->m_y]->m_y) ; p = &(*p)->m_vertical[y>(*p)->m_y]);
 		}
 		if( (*p) && (*p)->m_y == y ){
 			return 1;
@@ -51,11 +52,11 @@ class SparseMatrix
 		//nodo donde se va a insertar horizontalmente
 		if(x>(*q)->m_x){
 			Cgreater cmp;
-			for( ; (*q) && x != (*q)->m_x && cmp(x,(*q)->m_x) && (*q)->m_horizontal[x>(*q)->m_x] ; q = &(*q)->m_horizontal[x>(*q)->m_x]);
+			for( ; (*q) && x != (*q)->m_x && (*q)->m_horizontal[x>(*q)->m_x] && cmp(x,(*q)->m_horizontal[x>(*q)->m_x]->m_x) ; q = &(*q)->m_horizontal[x>(*q)->m_x]);
 		}
 		else{
 			Cless cmp;
-			for( ; (*q) && x != (*q)->m_x && cmp(x,(*q)->m_x) && (*q)->m_horizontal[x>(*q)->m_x] ; q = &(*q)->m_horizontal[x>(*q)->m_x]);
+			for( ; (*q) && x != (*q)->m_x && (*q)->m_horizontal[x>(*q)->m_x] && cmp(x,(*q)->m_horizontal[x>(*q)->m_x]->m_x) ; q = &(*q)->m_horizontal[x>(*q)->m_x]);
 		}
 		if( (*q)->m_x == x ){
 			return 1;
@@ -126,7 +127,8 @@ class SparseMatrix
 		}
 		else if( (*p)->m_y != y && (*q)->m_x != x ){
 
-			CNODE<T>* tmp_y = new CNODE<T>( (*p)->m_x, y, 0);
+
+			CNODE<T>* tmp_y = new CNODE<T>( (*p)->m_x, y, '-');
 
 			tmp_y->m_vertical[ y > (*p)->m_y ] = (*p)->m_vertical[ y > (*p)->m_y ];
 			if( tmp_y->m_vertical[ y > (*p)->m_y ] ){
@@ -136,10 +138,11 @@ class SparseMatrix
 			tmp_y->m_vertical[ y < (*p)->m_y ] = (*p);
 
 
-			CNODE<T>* tmp_x = new CNODE<T>( x, (*q)->m_y, 0);
+			CNODE<T>* tmp_x = new CNODE<T>( x, (*q)->m_y, '-');
 			tmp_x->m_horizontal[ x > (*q)->m_x ] = (*q)->m_horizontal[ x > (*q)->m_x ];
+
 			if( tmp_x->m_horizontal[ x > (*q)->m_x ] ){
-				tmp->m_horizontal[ x > (*q)->m_x ]->m_horizontal[ x < (*q)->m_x ] = tmp_x;
+				tmp_x->m_horizontal[ x > (*q)->m_x ]->m_horizontal[ x < (*q)->m_x ] = tmp_x;
 			}
 			(*q)->m_horizontal[ x > (*q)->m_x ] = tmp_x;
 			tmp->m_horizontal[ x < (*q)->m_x ] = (*q);
@@ -185,13 +188,13 @@ class SparseMatrix
 
 		while( tmp ){
 			tmp1 = tmp;
-			cout<<endl<<tmp->m_data<<"->";
+			cout<<endl<<tmp->m_data<<">";
 			while( tmp1 ){
 				cout<<tmp1->m_data<<"|";
 				tmp1 = tmp1->m_horizontal[1];
 			}
 			tmp1 = tmp;
-			cout<<endl<<tmp->m_data<<"<-";
+			cout<<endl<<tmp->m_data<<"<";
 			while( tmp1 ){
 				cout<<tmp1->m_data<<"|";
 				tmp1 = tmp1->m_horizontal[0];
@@ -202,13 +205,13 @@ class SparseMatrix
 
 		while( tmp ){
 			tmp1 = tmp;
-			cout<<endl<<tmp->m_data<<"->";
+			cout<<endl<<tmp->m_data<<">";
 			while( tmp1 ){
 				cout<<tmp1->m_data<<"|";
 				tmp1 = tmp1->m_horizontal[1];
 			}
 			tmp1 = tmp;
-			cout<<endl<<tmp->m_data<<"<-";
+			cout<<endl<<tmp->m_data<<"<";
 			while( tmp1 ){
 				cout<<tmp1->m_data<<"|";
 				tmp1 = tmp1->m_horizontal[0];
