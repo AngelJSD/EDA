@@ -22,7 +22,7 @@ public:
     void insert(T x){
 
         //cout<<"h"<<endl;
-        cout<<"INSERTANDO "<<x<<endl;
+        //cout<<"INSERTANDO "<<x<<endl;
         int id=m_f(x,m_size);
         //cout<<"     INSERTANDO EN: "<<id<<endl;
         return m_table[id].insert(x);
@@ -51,9 +51,9 @@ public:
         for(int i=0; i<m_size; i++){
 
             if(m_table[i].get_col()==0) ++col;
-            cout<<m_table[i].get_col()<<",";
+            //cout<<m_table[i].get_col()<<",";
         }
-        cout<<endl;
+        //cout<<endl;
         return col;
     }
 };
