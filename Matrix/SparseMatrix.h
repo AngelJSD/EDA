@@ -71,7 +71,7 @@ class SparseMatrix{
 				if ( (*q) != m_root ){
 					m_findy(y, q);
 				}*/
-				
+
 			if( (*p) == (*q) && (*p)->m_y == y && (*p)->m_x == x ){
 				return true;
 			}
@@ -88,8 +88,21 @@ class SparseMatrix{
 			}
 			CNODE<T>* tmp = new CNODE<T> (x, y, a);
 
-			/*s*/if( (*p)->m_y == y && (*p)->m_x != x && (*p) == (*q) ){
-				/*1 - Inserción horizontal -> (5, 3)
+			if ( (*p)->m_y == y ){
+				m_findx(x, p);
+			}
+
+			if ( (*q)->m_x == x ){
+				m_findy(y, q);
+			}
+
+			if( (*p) == (*q) && (*p)->m_y == y && (*p)->m_x == x ){
+				(*q)->m_data = a;
+				return 0;
+			}
+
+			if( (*p)->m_y == y && (*p)->m_x != x && (*p) == (*q) ){
+				/*1 - Inserción horizontal -> (5, 3) - Creacion de fila
 
 						(3, 3)<------------>(5, 3)
 
@@ -106,7 +119,7 @@ class SparseMatrix{
 			}
 			else if( (*p)->m_y == y && (*p)->m_x != x && (*q)->m_y == y && (*q)->m_x != x && (*p) != (*q) ){
 				/*	Inserción horizontal -> (5, 3) - Caso 2
-				(q)(3, 3)<---->(p)(4, 3)
+				(3, 3)<---->(4, 3)
 				----------------------------------
 				(3, 3)<---->(4, 3)<---->(5, 3)
 				*/
@@ -118,7 +131,7 @@ class SparseMatrix{
 				tmp->m_horizontal[ x < (*q)->m_x ] = (*q);
 			}
 			else if( (*p)->m_y != y && (*p)->m_x == x && (*p) == (*q) ){
-				/* 2 - Inserción vertical -> (3, 5)
+				/* 2 - Inserción vertical -> (3, 5) - Cración de columna
 
 						(3, 3)
 						   ^
@@ -160,7 +173,8 @@ class SparseMatrix{
 				(*p)->m_vertical[ y > (*p)->m_y ] = tmp;
 				tmp->m_vertical[ y < (*p)->m_y ] = (*p);
 			}
-			/*s*/else if( (*p)->m_y != y && (*p)->m_x != x && (*q)->m_y != y && (*q)->m_x == x && (*p) != (*q) ){
+			// else if( (*p)->m_y != y && (*p)->m_x != x && (*q)->m_y != y && (*q)->m_x == x && (*p) != (*q) ){
+			else if( (*p)->m_y != y && (*q)->m_x == x && (*p) != (*q) ){
 				/* Inserción cuando solo se tiene en 'X' y no en 'Y' -> (5, 5)
 							(3, 3)<------->(5, 3)
 				----------------------------------
@@ -203,7 +217,8 @@ class SparseMatrix{
 				tmp->m_vertical[ y < (*q)->m_y ] = (*q);
 
 			}
-			/*s*/else if( (*p)->m_y == y && (*p)->m_x != x && (*q)->m_y != y && (*q)->m_x !=x && (*p) != (*q) ){
+			// else if( (*p)->m_y == y && (*p)->m_x != x && (*q)->m_y != y && (*q)->m_x !=x && (*p) != (*q) ){
+			else if( (*p)->m_y == y && (*q)->m_x !=x && (*p) != (*q) ){
 				/* Inserción cuando solo se tiene en 'Y' y no en 'X' -> (5, 5)
 							(3, 3)
 							   ^
@@ -250,7 +265,8 @@ class SparseMatrix{
 				tmp->m_vertical[ y < (*q)->m_y ] = (*q);
 
 			}
-			/*s*/else if( (*p)->m_y == y && (*p)->m_x != x && (*q)->m_y != y && (*q)->m_x == x && (*p) != (*q) ){
+			// else if( (*p)->m_y == y && (*p)->m_x != x && (*q)->m_y != y && (*q)->m_x == x && (*p) != (*q) ){
+			else if( (*p)->m_y == y && (*q)->m_x == x && (*p) != (*q) ){
 				/* Inserción solo del nodo -> (5, 5)
 				----------------------------------
 							(3, 3)<------->(5, 3)
@@ -281,7 +297,8 @@ class SparseMatrix{
 				(*q)->m_vertical[ y > (*q)->m_y ] = tmp;
 				tmp->m_vertical[ y < (*q)->m_y ] = (*q);
 			}
-			/*s*/else if( (*p)->m_y != y && (*p)->m_x != x && (*p) == (*q) ){
+			//else if( (*p)->m_y != y && (*p)->m_x != x && (*p) == (*q) ){
+			else if( (*p)->m_y != y && (*p)->m_x != x ){
 				/*Inserción de "esquina" -> (5, 5)
 					(3, 3)
 					-------------------
