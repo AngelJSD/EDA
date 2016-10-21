@@ -9,19 +9,61 @@ class cVPT<T>{
 			mRoot == nullptr;
 		};
 
-		vector<pair<string, int>> mDistances;
+		vector<pair<string, int> > mDistances;
 
 		void generateDistances();
 		int Distance(string, string);
 		int Distance(mus, mus);
+		int Mediana(int, int);
 
 		void Generation(T files[], int n){
 
+					int i,f,mediana,j;
+					cNode<T>* p;
+					vector<pair<T,int> > distancias=getWords(files[0]);
+					vector<pair<T,int> > l,r;
+					p=mRoot;
+					stack<pair<cNode<T>*,vector<pair<T,int> > > > pila;
+					T a;
+					pila.push(make_pair(p,distancias);
+					i=0;
+					while(!pila.empty()){
+									p=pila.top().first;
+									distancias=pila.top().second;
+									pila.pop();
+									j=rand()%distancias.size();
+									p->mData=distancias[j].first;
+									distancias.erase(distancias[j]);
+									i=0;
+									f=palabras.size()-1;
+									efe();
+									p->mediana=Mediana(i,f);
+									int k;
 
+									for(k=0; distancias[k]<=mediana; ++k)
+													l.push_back(distancias[k]);
 
+									for(; k<distancias.size(); ++k)
+													r.push_back(distancias[k]);
+
+									pila.push(make_pair(p->mChild[0],l));
+									pila.push(make_pair(p->mChild[1],r));
+					}
 		};
 
 };
+
+int cpalabrasPT::Mediana(int i, int f){
+
+				int med;
+
+				if((f-i)%2 != 0)  //es par
+								med=(palabras[(i + f)/2] + palabras[(i + f)/2 + 1])/2;
+				else
+								med=palabras[(i + f)/2];
+
+				return med;
+}
 
 void cVPT::generateDistances(string file){
 
