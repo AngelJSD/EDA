@@ -1,15 +1,14 @@
 
 template <typename T>
-class cNode<T>{
+class cNode{
 	public:
-		
+
 		T mData;
 		cNode<T>* mChild[2];
-		int mMediana;
+		int mMediana=0;
 
-		cNode(T data, int mediana){
-			mData = data;
-			mMediana = mediana;
+		cNode(){
+		
 		}
 
 };
