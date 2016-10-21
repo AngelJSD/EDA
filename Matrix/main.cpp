@@ -3,15 +3,16 @@
 
 int main(){
 
-	cout << "Hello world!" << endl;
-	SparseMatrix<char> Matriz(1, 2, 'a');
-	cout<<"z"<<endl;
-	Matriz.m_insert(1, 1, 'z');
-	cout<<"z"<<endl;
-	Matriz.m_insert(3, 5, 'z');
-	cout<<"a"<<endl;
-	Matriz.m_insert(2, 3, 's');
+	SparseMatrix<string> Matriz(3, 3, "(3, 3)");
+	Matriz.m_insert(1, 1, "(1, 1)", "1-1");
+	Matriz.m_insert(1, 2, "(1, 2)", "1-2");
+	Matriz.m_insert(2, 2, "(2, 2)", "2-2");
+	// cout<<"vivo"<<endl;
+	Matriz.m_insert(5, 5, "(5, 5)", "5-5");
+	Matriz.m_insert(7, 10, "(7, 10)", "7-10");
+	Matriz.m_insert(1, 6, "(1, 6)", "1-6");
 	Matriz.print();
+
 	return 0;
 
 }
