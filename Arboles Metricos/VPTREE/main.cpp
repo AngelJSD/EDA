@@ -1,11 +1,14 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <vector>
+#include <algorithm>
 #include "vpTree.h"
 
 using namespace std;
 
 
- int LDistance(string, string);
+int LDistance(string, string);
 
 int main(){
 	return 0;
