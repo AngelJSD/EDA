@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <stack>
+#include <queue>
 #include "node.h"
 
 using namespace std;
@@ -113,7 +114,7 @@ class cVPT{
 					// cout<<"holi3"<<endl;
 				if(distancias.size()==0) continue;
 				j = rand() % distancias.size();
-					cout<<"aleatorio:"<<distancias[j].first<<endl;
+					//cout<<"aleatorio:"<<distancias[j].first<<endl;
 				p->mData = distancias[j].first;
 					// cout<<"holi4"<<endl;
 				distancias.erase( distancias.begin() + j );
@@ -125,10 +126,10 @@ class cVPT{
 				p->mMediana = Mediana(i,f);
 					// cout<<"holi7"<<endl;
 
-				for(int z=0; z < distancias.size(); ++z)
+				/*for(int z=0; z < distancias.size(); ++z)
 				{
 					cout<<distancias[z].first<<" , "<<distancias[z].second<<endl;
-				}
+				}*/
 				if(distancias.size()!=0){
 					int k;
 					for(k = 0; k<distancias.size() && distancias[k].second <= p->mMediana; k++)
@@ -147,16 +148,69 @@ class cVPT{
 					// {
 					// 	cout<<r[z].first<<" , "<<r[z].second<<endl;
 					// }
-					p->mChild[0]=new cNode<T>();
-					p->mChild[1]=new cNode<T>();
+					
 					// cout<<"holi10"<<endl;
-					if(l.size()!=0) pila.push(make_pair(p->mChild[0],l));
-					if(r.size()!=0) pila.push(make_pair(p->mChild[1],r));
+					if(l.size()!=0) {
+						p->mChild[0]=new cNode<T>();
+						pila.push(make_pair(p->mChild[0],l));
+					}
+					if(r.size()!=0) {
+						p->mChild[1]=new cNode<T>();
+						pila.push(make_pair(p->mChild[1],r));
+					}
 				}
 				int w;
-				cin>>w;
+				//cin>>w;
 			}
 
 		};
+		void print(){
+
+			int nivel;
+			T padre;
+			bool hijo;
+			queue<pair<pair<cNode<T>*,bool> ,pair<int,T> > > cola;
+			cNode<T>* aux;
+
+			cola.push(make_pair(make_pair(mRoot,0),make_pair(0," ")));
+
+			while(!cola.empty()){
+
+				aux = cola.front().first.first;
+				hijo = cola.front().first.second;
+				nivel = cola.front().second.first;
+				padre = cola.front().second.second;
+
+				//DATO<<NIVEL EN EL QUE ESTA<<PADRE<<SI ESTA A LA IZQUIERDA O DERECHA
+				cout<<aux->mData<<" en nivel "<<nivel<<" con padre "<<padre<<" "<<hijo<<endl;
+				cola.pop();
+
+				if(aux->mChild[0]!=nullptr){
+					cola.push(make_pair(make_pair(aux->mChild[0],0),make_pair(nivel+1,aux->mData)));
+				}
+				if(aux->mChild[1]!=nullptr){
+					cola.push(make_pair(make_pair(aux->mChild[1],1),make_pair(nivel+1,aux->mData)));
+				}
+			}
+			cout<<endl;
+		};
+
+		void search(cNode<T>* n, T target, int radius){
+
+			if(n==nullptr) return;
+			int dist=lDistance(n->mData, target);
+			if(dist<radius)
+				cout<<n->mData<<" "<<dist<<endl;
+
+            if ( dist - radius <= n->mMediana ) {
+                search( n->mChild[0], target, radius );
+            }
+
+            if ( dist + radius > n->mMediana ) {
+                search( n->mChild[1], target, radius );
+            }
+
+		};
+
 
 };

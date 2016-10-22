@@ -8,7 +8,8 @@ class cNode{
 		int mMediana=0;
 
 		cNode(){
-		
+			mChild[0]=nullptr;
+			mChild[1]=nullptr;
 		}
 
 };
