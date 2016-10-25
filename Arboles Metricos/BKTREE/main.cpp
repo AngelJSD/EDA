@@ -9,22 +9,15 @@ using namespace std;
 
 int main()
 {
-    bkt arbol;
+    string files[1] = {"ejemplo.txt"};
+    bkt<string> arbol(files);
 
-    arbol.my_insert("hol");
-    arbol.my_insert("hla");
-    arbol.my_insert("nola");
-    arbol.my_insert("vaca");
-    arbol.my_insert("sol");
-    arbol.my_insert("sal");
-    arbol.my_insert("como");
-    arbol.my_insert("altar");
-    arbol.my_insert("angel");
+    //cout<<arbol.root->hijos.size()<<endl;
+    //cout<<arbol.my_find("hla")<<endl;
 
-    cout<<arbol.root->hijos.size()<<endl;
-    cout<<arbol.my_find("hla")<<endl;
+    //arbol.my_print();
 
-    arbol.my_print();
-
+    arbol.my_search(arbol.root,"de",3);
+    //arbol.my_search(arbol.root,"perro",2);
     return 0;
 }
