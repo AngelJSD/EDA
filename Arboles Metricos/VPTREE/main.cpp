@@ -4,6 +4,7 @@ int LDistance(string, string);
 
 int main(){
 
+<<<<<<< Updated upstream
 	srand(time(NULL));
 
 	string files[1] = {"diccionario.txt"};
@@ -24,4 +25,11 @@ int main(){
 
 	return 0;
 
+=======
+	cVPT<string> arbol;
+	arbol.Distance("ejemplo.txt");
+
+	return 0;
+
+>>>>>>> Stashed changes
 }

@@ -3,8 +3,11 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+<<<<<<< Updated upstream
 #include <stack>
 #include <queue>
+=======
+>>>>>>> Stashed changes
 #include "node.h"
 
 using namespace std;
@@ -14,7 +17,11 @@ class cVPT{
 
 	private:
 
+<<<<<<< Updated upstream
 		bool static mySort(pair<string, int> i, pair<string, int> j) {
+=======
+		bool mySort(pair<string, int> i, pair<string, int> j) {
+>>>>>>> Stashed changes
 			return (i.second < j.second);
 		}
 
@@ -26,7 +33,11 @@ class cVPT{
 			Generation(files);
 		};
 
+<<<<<<< Updated upstream
 		vector<pair<T, int>> distancias;
+=======
+		vector<pair<T, int>> mDistances;
+>>>>>>> Stashed changes
 
 		void Distances(vector<pair<string, int> > &plbs, string rnd){
 			for (int i = 0; i < plbs.size(); ++i) {
@@ -34,6 +45,7 @@ class cVPT{
 			}
 			sort(plbs.begin(), plbs.end(), mySort);
 		}
+<<<<<<< Updated upstream
 
 		int lDistance(string s1, string s2){
 			int N1 = s1.size();
@@ -77,11 +89,48 @@ class cVPT{
 
 			ifstream myfile(file);
 			string palabra;
+=======
+
+		int lDistance(string s1, string s2){
+			int N1 = s1.size();
+			int N2 = s2.size();
+			int i, j;
+			vector<int> T(N2+1);
+
+			for ( i = 0; i <= N2; i++ ){
+				T[i] = i;
+			}
+
+			for ( i = 0; i < N1; i++ ){
+				T[0] = i+1;
+				int corner = i;
+				for ( j = 0; j < N2; j++ )
+				{
+					int upper = T[j+1];
+					if ( s1[i] == s2[j] ){
+						T[j+1] = corner;
+					}
+					else{
+						T[j+1] = min(T[j], min(upper, corner)) + 1;
+					}
+				corner = upper;
+				}
+			}
+			return T[N2];
+		}
+
+		vector<pair<string, int>> getWords(string file){
+
+			string palabra;
+			ifstream myfile(file);
+
+>>>>>>> Stashed changes
 			vector<pair<string, int>> palabras;
 
 			if ( myfile.is_open() ) {
 
 				while ( getline( myfile, palabra) ) {
+<<<<<<< Updated upstream
 					palabras.push_back( make_pair(palabra, -1) );
 				}
 
@@ -213,4 +262,21 @@ class cVPT{
 		};
 
 
+=======
+					palabras.push_back( mk_pair(palabra, (-1)) );
+				}
+
+				myfile.close();
+				palabras.pop_back();
+			}
+			return palabras;
+		}
+
+		void Generation(T files[], int n){
+
+
+
+		};
+
+>>>>>>> Stashed changes
 };
