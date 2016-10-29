@@ -140,7 +140,7 @@ double bkt<T>::distancia(string img1, string img2){
 	normalize( hist_base, hist_base, 0, 1, NORM_MINMAX, -1, Mat() );
 	normalize( hist_test1, hist_test1, 0, 1, NORM_MINMAX, -1, Mat() );
 
-	double comparison = ceil((1-compareHist( hist_base, hist_test1, 0 ))*100);
+	double comparison = ceil( (1 - abs(compareHist( hist_base, hist_test1, 0 ))) * 100 );
 	//double comparison = compareHist( hist_base, hist_test1, 1 );
 
 	return comparison;
@@ -209,9 +209,13 @@ void bkt<T>::my_search(Node<T>* n, T s, int radius){
     //int d=distancia(n->dato,s);
 	double d=distancia(n->dato,s);
 
-    if(d<radius)
-        cout<<n->dato<<' '<<d<<endl;
+    if(d<=radius){
+		cout<<n->dato<<' '<<d<<endl;
 
+		namedWindow( n->dato, WINDOW_AUTOSIZE );
+		imshow( n->dato, imread( n->dato, IMREAD_COLOR ) );
+
+	}
     for(int i=0; i<n->hijos.size(); ++i)
         if(n->hijos[i].first>=d-radius && n->hijos[i].first<=d+radius){
             my_search(n->hijos[i].second, s, radius);

@@ -10,19 +10,26 @@
 
 using namespace std;
 
-int main()
-{
-    string files[1] = {"imagenes.txt"};
-    bkt<string> arbol(files);
+int main(int argc, char const *argv[]) {
 
-    //cout<<arbol.root->hijos.size()<<endl;
-    //cout<<arbol.my_find("hla")<<endl;
+	if( argc < 3 ){
+		printf("** Error. Usage: ./main.o image1 radio\n");
+		return -1;
+	}
+
+	string files[1] = {"imagenes.txt"};
+	bkt<string> arbol(files);
+
+	//cout<<arbol.root->hijos.size()<<endl;
+	//cout<<arbol.my_find("hla")<<endl;
 	// cout<<"ojo1 "<<endl;
-    arbol.my_print();
+	arbol.my_print();
 
 	cout<<endl<<endl;
+	int radio = atoi(argv[2]);
+	arbol.my_search(arbol.root, argv[1], radio);
+	printf( "Done \n" );
 
-    arbol.my_search(arbol.root, "bb1.jpg", 100);
-    //arbol.my_search(arbol.root,"perro",2);
-    return 0;
+	waitKey(0);
+	return 0;
 }
