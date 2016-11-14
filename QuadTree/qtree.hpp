@@ -186,25 +186,17 @@ bool cQTree<T>::mFindByRange(coord c1, coord c2, cNode<T>* tmp){
 
 	if( tmp->mIsLeaf() ){
 		// cout<<"Is leaf"<<endl;
-		// cout<<"Cudrante "<<tmp->mCoord1.x<<","<<tmp->mCoord1.y<<"-"<<tmp->mCoord2.x<<","<<tmp->mCoord2.y<<endl;
 
 		for (uint i = 0; i < tmp->mElements.size(); ++i) {
-			// cout<<"Evaluo "<<tmp->mElements[i].mData<<"("<<tmp->mElements[i].mCoord.x<<","<<tmp->mElements[i].mCoord.y<<")"<<endl;
 			if( mInsideQuad(tmp->mElements[i].mCoord, c1, c2) ){
-				// cout<<"Entre if"<<endl;
 				cout<<tmp->mElements[i].mData<<"("<<tmp->mElements[i].mCoord.x<<","<<tmp->mElements[i].mCoord.y<<")"<<"-";
 			}
 		}
 		return true;
 	}
 
-
-
 	if ( tmp->mInside(c1, c2) ) {
-	// if ( tmp->mInside(c1) || tmp->mInside(c2) ) {
-		//cout<<"No is leaf"<<endl;
 		for (int i = 0; i < 4; ++i) {
-
 			mFindByRange(c1, c2, tmp->mChild[i]);
 		}
 	}
@@ -212,10 +204,7 @@ bool cQTree<T>::mFindByRange(coord c1, coord c2, cNode<T>* tmp){
 
 template <typename T>
 bool cQTree<T>::mInsideQuad(coord c1, coord c2, coord c3){
-	//if(c1.x >= c2.x && c1.y >= c2.y && c1.x <= c3.x && c1.y <= c3.y)
-		//cout<<"Entré :D "<<c1.x<<" "<<c2.x<<" "<<c3.x<<" "<<c1.y<<" "<<c2.y<<" "<<c3.y<<endl;
 	return c1.x >= c2.x && c1.y >= c2.y && c1.x <= c3.x && c1.y <= c3.y;
-	//return ( (c1.x >= c2.x && c1.x <= c3.x) ) && ( (c1.y >= c2.y && c1.y <= c3.y));
 }
 
 template <typename T>
