@@ -23,10 +23,14 @@ struct coord
 				c1.x > c2.x? c2.x : c1.x,
 				c1.y > c2.y? c2.y : c1.y
 			);
-			
+
 		vector<coord> rpt;
 		rpt.push_back(low);
 		rpt.push_back(high);
 		return rpt;
+	}
+
+	bool operator==(coord c1){
+		return x == c1.x && y == c1.y;
 	}
 };

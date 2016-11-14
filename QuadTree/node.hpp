@@ -25,6 +25,7 @@ class cNode{
 		cNode(coord, coord);
 		bool mInside(cData<T>);
 		bool mOverflow(int);
+		bool mUnderflow();
 		bool mIsLeaf();
 		void mCreateQuad();
 		void mAssignData();
@@ -58,8 +59,9 @@ cNode<T>::cNode(coord c1, coord c2, vector<cData<T> > elements){
 template <typename T>
 cNode<T>::cNode(coord c1, coord c2){
 
-	mCoord1 = c1;
-	mCoord2 = c2;
+	vector<coord> crd = c1.generate(c1,c2);
+	mCoord1 = crd[0];
+	mCoord2 = crd[1];
 
 	mX = ( mCoord1.x + mCoord2.x ) / 2.0;
 	mY = ( mCoord1.y + mCoord2.y ) / 2.0;
@@ -74,12 +76,17 @@ cNode<T>::~cNode(){
 
 template <typename T>
 bool cNode<T>::mIsLeaf(){
-	return ! (mElements.empty());
+	return mChild[0] == nullptr;
 }
 
 template <typename T>
 bool cNode<T>::mOverflow(int OVF){
 	return mElements.size() > OVF;
+}
+
+template <typename T>
+bool cNode<T>::mUnderflow(){
+	return mElements.size() == 0;
 }
 
 template <typename T>
@@ -101,6 +108,7 @@ void cNode<T>::mCreateQuad(){
 
 template <typename T>
 bool cNode<T>::mInside(cData<T> data){
+	// cout<<"Data: "<<data.mCoord.x<<"-"<<data.mCoord.y<<" ---- nodo: "<<mCoord1.x<<"-"<<mCoord1.y<<"--"<<mCoord2.x<<"-"<<mCoord2.y<<endl;
 	if( data.mCoord.x <= mCoord2.x && data.mCoord.x >= mCoord1.x && data.mCoord.y <= mCoord2.y && data.mCoord.y >= mCoord1.y ){
 		return true;
 	}
@@ -109,9 +117,8 @@ bool cNode<T>::mInside(cData<T> data){
 
 template <typename T>
 void cNode<T>::mAssignData(){
-
 	for (uint i = 0; i < mElements.size(); ++i) {
-
+		// cout<<mElements[i].mData<<endl;
 		if( mChild[0]->mInside(mElements[i]) ){
 			mChild[0]->mElements.push_back(mElements[i]);
 		}

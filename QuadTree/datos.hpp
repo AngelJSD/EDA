@@ -9,4 +9,8 @@ struct cData{
 			mData = data;
 			mCoord = c1;
 		}
+
+		bool operator==(cData<T> data){
+			return mData == data.mData && mCoord == data.mCoord;
+		}
 };

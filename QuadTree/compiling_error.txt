@@ -1,0 +1,50 @@
+In file included from /home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp:1:0,
+                 from /home/fabalcu/Programming/EDA_Grupal/QuadTree/main.cpp:1:
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/node.hpp: En el constructor ‘cNode<T>::cNode(coord, coord, std::vector<cData<T> >)’:
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/node.hpp:48:7: error: ‘uint’ no se declaró en este ámbito
+  for (uint i = 0; i < elements.size(); ++i) {
+       ^
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/node.hpp:48:19: error: ‘i’ no se declaró en este ámbito
+  for (uint i = 0; i < elements.size(); ++i) {
+                   ^
+In file included from /home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp:1:0,
+                 from /home/fabalcu/Programming/EDA_Grupal/QuadTree/main.cpp:1:
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/node.hpp: En la función miembro ‘void cNode<T>::mAssignData()’:
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/node.hpp:114:7: error: ‘uint’ no se declaró en este ámbito
+  for (uint i = 0; i < mElements.size(); ++i) {
+       ^
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/node.hpp:114:19: error: ‘i’ no se declaró en este ámbito
+  for (uint i = 0; i < mElements.size(); ++i) {
+                   ^
+In file included from /home/fabalcu/Programming/EDA_Grupal/QuadTree/main.cpp:1:0:
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp: En el constructor ‘cQTree<T>::cQTree(std::vector<cData<T> >, int)’:
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp:34:7: error: ‘uint’ no se declaró en este ámbito
+  for (uint i = 0; i < elements.size(); ++i) {
+       ^
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp:34:19: error: ‘i’ no se declaró en este ámbito
+  for (uint i = 0; i < elements.size(); ++i) {
+                   ^
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp: En la función miembro ‘bool cQTree<T>::mFindElement(cData<T>)’:
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp:71:7: error: ‘uint’ no se declaró en este ámbito
+  for (uint i = 0; tmp && i < tmp->mElements.size(); ++i) {
+       ^
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp:71:26: error: ‘i’ no se declaró en este ámbito
+  for (uint i = 0; tmp && i < tmp->mElements.size(); ++i) {
+                          ^
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp: En la función miembro ‘void cQTree<T>::print(cNode<T>*)’:
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp:118:8: error: ‘uint’ no se declaró en este ámbito
+   for (uint i = 0; i < tmp->mElements.size(); ++i) {
+        ^
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp:118:20: error: ‘i’ no se declaró en este ámbito
+   for (uint i = 0; i < tmp->mElements.size(); ++i) {
+                    ^
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp:125:8: error: ‘uint’ no se declaró en este ámbito
+   for (uint i = 0; i < tmp->mChild.size(); i++) {
+        ^
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/qtree.hpp:125:20: error: ‘i’ no se declaró en este ámbito
+   for (uint i = 0; i < tmp->mChild.size(); i++) {
+                    ^
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/main.cpp: En la función ‘int main()’:
+/home/fabalcu/Programming/EDA_Grupal/QuadTree/main.cpp:12:18: error: ‘>>’ debe ser ‘> >’ dentro de una lista de argumentos de plantilla anidada
+  vector<cData<int>> elements;
+                  ^
