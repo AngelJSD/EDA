@@ -13,6 +13,7 @@ class cQTree{
 		int mLessY;
 
 		void mInsert(cData<T>);
+		void mExplosion(cNode<T>*);
 		bool mFindElement(cData<T>);
 		bool mDeleteElement(cData<T>);
 		void print(cNode<T>*);
@@ -79,11 +80,12 @@ bool cQTree<T>::mFindElement(cData<T> data){
 
 template <typename T>
 void cQTree<T>::mInsert(cData<T> data){
+
 	if ( mFindElement(data) ) {
 		return;
 	}
 	cNode<T>* tmp = mRoot;
-	// cout<<"Insertion"<<endl;
+	cout<<"Insertion"<<endl;
 	while( tmp && !(tmp->mIsLeaf()) ){
 		if(tmp->mChild[0]->mInside(data) ){
 			tmp = tmp->mChild[0];
@@ -98,15 +100,36 @@ void cQTree<T>::mInsert(cData<T> data){
 			tmp = tmp->mChild[3];
 		}
 	}
+
 	tmp->mElements.push_back(data);
-	if ( tmp->mOverflow(mOVF) ) {
-		// cout<<"Split"<<endl;
-		tmp->mCreateQuad();
-		// cout<<"Assign"<<endl;
-		tmp->mAssignData();
-	}
+
+	mExplosion(tmp);
 
 }
+
+
+template <typename T>
+void cQTree<T>::mExplosion(cNode<T>* tmp){
+
+	if( !tmp ){
+		return;
+	}
+
+	if ( tmp->mOverflow(mOVF) ) {
+		cout<<"Split"<<endl;
+		tmp->mCreateQuad();
+		cout<<"Assign"<<endl;
+		tmp->mAssignData();
+	}
+	for (int i = 0; i < 4; ++i) {
+
+		if( tmp->mChild[i] && tmp->mChild[i]->mOverflow(mOVF) ){
+			cout<<"Verify Sons"<<endl;
+			mExplosion(tmp->mChild[i]);
+		}
+	}
+}
+
 
 template <typename T>
 void cQTree<T>::print(cNode<T>* tmp){
@@ -131,19 +154,6 @@ void cQTree<T>::print(cNode<T>* tmp){
 
 }
 
-
-// template <typename T>
-// bool cQTree<T>::mVerify(cNode<T> &tmp){
-// 	if ( !(tmp) || tmp->mIsLeaf() ) {
-// 		return;
-// 	}
-// 	else{
-// 		for (uint i = 0; i < tmp->mChild.size(); i++) {
-//
-// 		}
-// 	}
-//
-// }
 
 template <typename T>
 bool cQTree<T>::mDeleteElement(cData<T> data){

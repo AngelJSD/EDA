@@ -1,6 +1,8 @@
 #include "qtree.hpp"
 
-main(){
+int main(int argc, char const *argv[]) {
+
+	srand(time(NULL));
 
 	cData<int> d1(10, coord(2, 2));
 	cData<int> d2(11, coord(5, 5));
@@ -10,7 +12,7 @@ main(){
 	cData<int> d6(15, coord(3, 4));
 	cData<int> d7(16, coord(2, 4));
 
-	vector<cData<int>> elements;
+	vector< cData< int > > elements;
 	elements.push_back(d1);
 	elements.push_back(d2);
 
@@ -44,5 +46,7 @@ main(){
 	cout<<"--------"<<endl;
 	arbol.print(arbol.mRoot);
 	cout<<"--------"<<endl;
+
+	return 0;
 
 }
