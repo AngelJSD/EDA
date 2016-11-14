@@ -40,15 +40,19 @@ cNode<T>::cNode(coord c1, coord c2, vector<cData<T> > elements){
 	mCoord1 = crd[0];
 	mCoord2 = crd[1];
 
-	cout<<"constructor"<<endl;
+	// cout<<"constructor"<<endl;
 
 	mX = ( mCoord1.x + mCoord2.x ) / 2.0;
 	mY = ( mCoord1.y + mCoord2.y ) / 2.0;
 
 	for (uint i = 0; i < elements.size(); ++i) {
 		mElements.push_back(elements[i]);
+		// cout<<mElements[i].mData<<"-";
 	}
+	cout<<endl;
 
+	// cout<<"child resize"<<endl;
+	mChild.resize(4);
 }
 
 template <typename T>
@@ -60,6 +64,8 @@ cNode<T>::cNode(coord c1, coord c2){
 	mX = ( mCoord1.x + mCoord2.x ) / 2.0;
 	mY = ( mCoord1.y + mCoord2.y ) / 2.0;
 
+	// cout<<"child resize"<<endl;
+	mChild.resize(4);
 }
 template <typename T>
 cNode<T>::~cNode(){
@@ -68,7 +74,7 @@ cNode<T>::~cNode(){
 
 template <typename T>
 bool cNode<T>::mIsLeaf(){
-	return mChild.empty();
+	return ! (mElements.empty());
 }
 
 template <typename T>
