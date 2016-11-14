@@ -1,6 +1,5 @@
 #include <vector>
 
-
 using namespace std;
 
 struct coord
@@ -14,7 +13,7 @@ struct coord
         x = X;
         y = Y;
     }
-    
+
     vector<coord> generate(coord c1, coord c2){
         coord high(
                     c1.x > c2.x? c1.x : c2.x,
