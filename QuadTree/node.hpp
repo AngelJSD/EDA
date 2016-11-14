@@ -24,6 +24,8 @@ class cNode{
 		cNode(coord, coord, vector<cData<T> >);
 		cNode(coord, coord);
 		bool mInside(cData<T>);
+		bool mInside(coord);
+		bool mInside(coord, coord);
 		bool mOverflow(int);
 		bool mUnderflow();
 		bool mIsLeaf();
@@ -104,6 +106,22 @@ void cNode<T>::mCreateQuad(){
 	c2 = coord(mCoord2.x, mCoord1.y);
 	mChild[3] = new cNode<T>(c1, c2);
 
+}
+
+
+template <typename T>
+bool cNode<T>::mInside(coord c1){
+	return c1.x >= mCoord1.x && c1.y >= mCoord1.y && c1.x <= mCoord2.x && c1.y <= mCoord2.y;
+}
+
+
+template <typename T>
+bool cNode<T>::mInside(coord c1, coord c2){
+	//cout<<"Evaluando nodo ("<<mCoord1.x<<" , "<<mCoord1.y<<") ("<<mCoord2.x<<" , "<<mCoord2.y<<")"<<endl;
+	if(( (mCoord1.x >= c1.x && mCoord1.x <= c2.x) || (mCoord2.x >= c1.x && mCoord2.x <= c2.x) ) && ( (mCoord1.y >= c1.y && mCoord1.y <= c2.y) || (mCoord2.y >= c1.y && mCoord2.y <= c2.y) )){
+		//cout<<"Entre si otra vez :v"<<endl;
+	}
+	return ( (mCoord1.x >= c1.x && mCoord1.x <= c2.x) || (mCoord2.x >= c1.x && mCoord2.x <= c2.x) ) && ( (mCoord1.y >= c1.y && mCoord1.y <= c2.y) || (mCoord2.y >= c1.y && mCoord2.y <= c2.y) );
 }
 
 template <typename T>
