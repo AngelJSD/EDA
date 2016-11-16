@@ -16,8 +16,10 @@ class cQTree{
 		void mInsert(cData<T>);
 		void mExplosion(cNode<T>*);
 		bool mFindElement(cData<T>);
+		bool mFindByRange(coord, coord, cNode<T>*);
 		bool mDeleteElement(cData<T>);
 		void print(cNode<T>*);
+		bool mInsideQuad(coord, coord, coord);
 		cQTree(vector< cData< T > >, int);
 		~cQTree();
 
@@ -46,11 +48,7 @@ cQTree<T>::cQTree(vector< cData< T > > elements, int OVF){
 	mRoot = new cNode<T>(coord(mLessX, mLessY), coord(mGreatX, mGreatY), elements);
 	mOVF = OVF;
 
-	if ( mRoot->mOverflow(mOVF) ) {
-		// cout<<"Overflow"<<endl;
-		mRoot->mCreateQuad();
-		mRoot->mAssignData();
-	}
+	mExplosion(mRoot);
 }
 
 template <typename T>
@@ -86,7 +84,7 @@ void cQTree<T>::mInsert(cData<T> data){
 		return;
 	}
 	cNode<T>* tmp = mRoot;
-	cout<<"Insertion"<<endl;
+	// cout<<"Insertion"<<endl;
 	while( tmp && !(tmp->mIsLeaf()) ){
 		if(tmp->mChild[0]->mInside(data) ){
 			tmp = tmp->mChild[0];
@@ -117,15 +115,15 @@ void cQTree<T>::mExplosion(cNode<T>* tmp){
 	}
 
 	if ( tmp->mOverflow(mOVF) ) {
-		cout<<"Split"<<endl;
+		// cout<<"Split"<<endl;
 		tmp->mCreateQuad();
-		cout<<"Assign"<<endl;
+		// cout<<"Assign"<<endl;
 		tmp->mAssignData();
 	}
 	for (int i = 0; i < 4; ++i) {
 
 		if( tmp->mChild[i] && tmp->mChild[i]->mOverflow(mOVF) ){
-			cout<<"Verify Sons"<<endl;
+			// cout<<"Verify Sons"<<endl;
 			mExplosion(tmp->mChild[i]);
 		}
 	}
@@ -134,8 +132,8 @@ void cQTree<T>::mExplosion(cNode<T>* tmp){
 
 template <typename T>
 void cQTree<T>::print(cNode<T>* tmp){
-	// cout<<"Bordes: "<<mRoot->mCoord1.x<<"-"<<mRoot->mCoord1.y<<endl;
-	// cout<<"Bordes: "<<mRoot->mCoord2.x<<"-"<<mRoot->mCoord2.y<<endl;
+	cout<<"Bordes: "<<tmp->mCoord1.x<<"-"<<tmp->mCoord1.y<<endl;
+	cout<<"Bordes: "<<tmp->mCoord2.x<<"-"<<tmp->mCoord2.y<<endl;
 	if ( !(tmp) ) {
 		return;
 	}
@@ -199,6 +197,32 @@ bool cQTree<T>::mDeleteElement(cData<T> data){
 		parent->mChild.clear()
 	}
 	return false;
+}
+template <typename T>
+
+bool cQTree<T>::mFindByRange(coord c1, coord c2, cNode<T>* tmp){
+
+	if( tmp->mIsLeaf() ){
+		// cout<<"Is leaf"<<endl;
+
+		for (uint i = 0; i < tmp->mElements.size(); ++i) {
+			if( mInsideQuad(tmp->mElements[i].mCoord, c1, c2) ){
+				cout<<tmp->mElements[i].mData<<"("<<tmp->mElements[i].mCoord.x<<","<<tmp->mElements[i].mCoord.y<<")"<<"-";
+			}
+		}
+		return true;
+	}
+
+	if ( tmp->mInside(c1, c2) ) {
+		for (int i = 0; i < 4; ++i) {
+			mFindByRange(c1, c2, tmp->mChild[i]);
+		}
+	}
+}
+
+template <typename T>
+bool cQTree<T>::mInsideQuad(coord c1, coord c2, coord c3){
+	return c1.x >= c2.x && c1.y >= c2.y && c1.x <= c3.x && c1.y <= c3.y;
 }
 
 template <typename T>
