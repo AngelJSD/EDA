@@ -1,4 +1,5 @@
 #include "node.hpp"
+#include<stack>
 
 template <typename T>
 class cQTree{
@@ -159,8 +160,10 @@ template <typename T>
 bool cQTree<T>::mDeleteElement(cData<T> data){
 
 	cNode<T>* tmp = mRoot;
+	cNode<T>* parent;
 	cout<<tmp->mInside(data)<<endl;
 	while( !(tmp->mIsLeaf()) ){
+		parent = tmp;
 		if(tmp->mChild[0]->mInside(data) ){
 			tmp = tmp->mChild[0];
 		}
@@ -179,6 +182,21 @@ bool cQTree<T>::mDeleteElement(cData<T> data){
 			tmp->mElements.erase(tmp->mElements.begin() + i);
 			return true;
 		}
+	}
+	int elements;
+	vector< cData< T > > new_data;
+	for (int i=0; i<4; i++)
+	{
+		elements+=parent->mChild[i]->mElements.size()
+		for (int j=0; j<mChild[i].mElements.size();j++)
+		{
+			new_data.push_back(mChild[j].mElements[j])
+		}
+	}
+	if (elements == mOVF)
+	{
+		parent->mElements = new_data;
+		parent->mChild.clear()
 	}
 	return false;
 }
