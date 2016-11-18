@@ -153,7 +153,6 @@ void cQTree<T>::print(cNode<T>* tmp){
 
 }
 
-
 template <typename T>
 bool cQTree<T>::mDeleteElement(cData<T> data){
 
@@ -178,7 +177,7 @@ bool cQTree<T>::mDeleteElement(cData<T> data){
 	for (uint i = 0; tmp && i < tmp->mElements.size(); ++i) {
 		if (tmp->mElements[i] == data) {
 			tmp->mElements.erase(tmp->mElements.begin() + i);
-			return true;
+			//return true;
 		}
 	}
 	int elements;
@@ -196,7 +195,7 @@ bool cQTree<T>::mDeleteElement(cData<T> data){
 		parent->mElements = new_data;
 		parent->mChild.clear()
 	}
-	return false;
+	return true;
 }
 template <typename T>
 
