@@ -180,20 +180,24 @@ bool cQTree<T>::mDeleteElement(cData<T> data){
 			//return true;
 		}
 	}
+
+
 	int elements;
 	vector< cData< T > > new_data;
-	for (int i=0; i<4; i++)
-	{
-		elements+=parent->mChild[i]->mElements.size()
-		for (int j=0; j<mChild[i].mElements.size();j++)
-		{
-			new_data.push_back(mChild[j].mElements[j])
+	for (int i=0; i<4; i++){
+		if ( !(tmp->mChild[i]) ) {
+			continue;
+		}
+		cout<<"Verification"<<endl;
+		elements += tmp->mChild[i]->mElements.size();
+		for (int j = 0; j < tmp->mChild[i]->mElements.size(); ++j){
+			new_data.push_back(tmp->mChild[j]->mElements[j]);
 		}
 	}
 	if (elements == mOVF)
 	{
 		parent->mElements = new_data;
-		parent->mChild.clear()
+		parent->mChild.clear();
 	}
 	return true;
 }
