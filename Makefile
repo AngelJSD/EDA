@@ -17,5 +17,9 @@ qptree:
 	@$(CXX) $(CXXFLAGS) QuadPoint/main.cpp
 	@./main.o
 
+kdtree:
+	@$(CXX) $(CXXFLAGS) KD-Tree/main.cpp
+	@./main.o
+
 clean:
 	rm *.o
