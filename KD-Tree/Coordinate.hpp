@@ -10,21 +10,9 @@ class cCoordinate {
 		vector<float> mCoordinates;
 
 	public:
-
-		cCoordinate (vector<float> coord){
-			mCoordinates = coord;
-		};
-
-		virtual ~cCoordinate (){
-			mCoordinates.clear();
-		};
-
-		cCoordinate operator=(cCoordinate coord){
-			mCoordinates = coord.mCoordinates;
-		};
-
-		float operator[](int pos){
-			return mCoordinates[pos];
-		};
+		cCoordinate (vector<float> coord);
+		int mGetDimension();
+		cCoordinate operator=(cCoordinate coord);
+		float operator[](int pos);
 
 };
