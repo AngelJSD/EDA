@@ -1,5 +1,5 @@
 #include <iostream>
-#include "KDTree.cpp"
+#include "KDTree.h"
 
 using namespace std;
 
@@ -14,17 +14,35 @@ void addCoordinates(vector<float>* coord, int dim)
     }
 }
 
+void addCoordinatesRan(vector<float>* coord, int dim)
+{
+    for (int i=0;i<dim;i++)
+    {
+        float coordinateI=rand() % 100;
+        coord->push_back(coordinateI);
+    }
+}
 
-int main(int argc, char const *argv[]) {
+
+int main() {
     cout<<"----------------KDTree---------------"<<endl;
     int dimensions;
     cout<<"Ingresa la cantidad de dimensiones: ";
     cin>>dimensions;
-	cKDTree<int> tree(dimensions);
+    cKDTree tree(dimensions);
+    int cantidad=11;
     vector<float> cord;
-    addCoordinates(&cord, dimensions);
-    cCoordinate cordinadita(cord);
-    cordinadita.print();
-    tree.mInsert(cordinadita);
-	return 0;
+    for (int i=0;i<cantidad;i++)
+    {
+        addCoordinates(&cord, dimensions);
+        cCoordinate cordenadita(cord);
+        cordenadita.print();
+        tree.mInsert(cordenadita);
+        cord.clear();
+    }
+
+    cout<<"Arbol"<<endl;
+    tree.print();
+    //tree.mInsert(cordenadita);
+    return 0;
 }
