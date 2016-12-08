@@ -5,18 +5,15 @@
 
 
 class cKDTree {
-private:
-
-public:
-	cNode* mRoot;
-
-	int mDimensions;
-	cKDTree(int);
-	void mInsert(cCoordinate);
-	bool mInsertAux(cCoordinate,cNode**,int);
-	virtual ~cKDTree ();
-	void print();
-	void print2(cNode* t, int nivel);
+	public:
+		cNode* mRoot;
+		int mDimensions;
+		cKDTree(int);
+		void mInsert(cCoordinate);
+		bool mInsertAux(cCoordinate,cNode**,int);
+		virtual ~cKDTree ();
+		void print();
+		void print2(cNode* t, int nivel);
 };
 
 
@@ -26,17 +23,13 @@ cKDTree::cKDTree(int dimensions){
 }
 
 
-
 cKDTree::~cKDTree(){
 	mRoot = nullptr;
 }
 
-
-
 void cKDTree::print() {
 	print2(mRoot,0);
 }
-
 
 
 void cKDTree::print2(cNode* t, int level) {
@@ -51,7 +44,6 @@ void cKDTree::print2(cNode* t, int level) {
 		print2(t->mGetChild(0), level+1);
 	}
 }
-
 
 
 bool cKDTree::mInsertAux(cCoordinate coord, cNode** t,int cd){
@@ -83,7 +75,5 @@ void cKDTree::mInsert(cCoordinate coord){
 		cout<<"La coordenada ya esta en el arbol"<<endl;
 	}
 }
-
-
 
 #endif //KD_TREE_KDTREE_H

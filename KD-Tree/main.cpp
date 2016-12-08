@@ -3,6 +3,7 @@
 
 using namespace std;
 
+/*Funcion para insertar elementos por teclado*/
 void addCoordinates(vector<float>* coord, int dim)
 {
     for (int i=0;i<dim;i++)
@@ -14,6 +15,7 @@ void addCoordinates(vector<float>* coord, int dim)
     }
 }
 
+/*Funcion para insertar elementos Random*/
 void addCoordinatesRan(vector<float>* coord, int dim)
 {
     for (int i=0;i<dim;i++)
@@ -34,15 +36,14 @@ int main() {
     vector<float> cord;
     for (int i=0;i<cantidad;i++)
     {
-        addCoordinates(&cord, dimensions);
+        addCoordinatesRan(&cord, dimensions);
+        //addCoordinates(&cord, dimensions);
         cCoordinate cordenadita(cord);
         cordenadita.print();
         tree.mInsert(cordenadita);
         cord.clear();
     }
-
-    cout<<"Arbol"<<endl;
+    cout<<"---Arbol---"<<endl;
     tree.print();
-    //tree.mInsert(cordenadita);
     return 0;
 }

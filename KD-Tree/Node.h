@@ -6,7 +6,6 @@ class cNode{
 	private:
 		cCoordinate mCoord;
 		int mCutCoordinate;
-
 	public:
 		cNode* mChild[2];
 		cNode(cCoordinate, int);
@@ -23,15 +22,17 @@ class cNode{
 		virtual ~cNode ();
 };
 
+
 cNode::cNode(cCoordinate coor, int cutCoordinate): mCoord(coor)
 {
 	mChild[0] = mChild[1] = nullptr;
 	mCutCoordinate = cutCoordinate;
 };
 
-cNode::~cNode(){
 
+cNode::~cNode(){
 };
+
 
 bool cNode::mIsLeaf(){
 	return (mChild[0] || mChild[1]);
@@ -72,13 +73,14 @@ cNode** cNode::mGetChildDir(bool child){
 	return &(mChild[child]);
 }
 
+
 cNode* cNode::mGetChild(bool child){
 	return (mChild[child]);
 }
 
+
 void cNode::mPrintCoordinates(){
 	mCoord.print();
 }
-
 
 #endif //KD_TREE_NODE_H
