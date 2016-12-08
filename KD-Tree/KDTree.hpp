@@ -4,10 +4,14 @@ template <typename T>
 class cKDTree {
 private:
 	cNode<T>* mRoot;
-	int mDimensions;
+
 public:
+    int mDimensions;
 	cKDTree<T> (int);
 	void mInsert(cCoordinate);
+    bool mInsertAux(cCoordinate,cNode<T>*,int);
 	virtual ~cKDTree ();
+    void print();
+    void print2(cNode<T>* t, int nivel);
 
 };

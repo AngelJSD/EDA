@@ -42,3 +42,20 @@ template <typename T>
 float cNode<T>::mGetCoordinate(int dimension){
 	return mCoord[dimension];
 };
+
+template <typename T>
+cCoordinate cNode<T>::mGetCoordinate(){
+    return mCoord;
+}
+
+template  <typename T>
+cNode<T>* cNode<T>::mGetChild(bool child)
+{
+    return mChild[child];
+}
+
+template <typename T>
+void cNode<T>::mPrintCoordinates()
+{
+    mCoord.print();
+}
