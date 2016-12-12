@@ -1,44 +1,61 @@
-#include "Node.hpp"
+#include "Node.h"
 
-
-template <typename T>
-cNode<T>::cNode (cCoordinate coord, int cutCoordinate){
-	mCoord = coord;
-	mChild[0] = mChild[1] = nullptr;
-	mCutCoordinate = cutCoordinate;
+cNode::cNode(cCoordinate coor, int cutCoordinate): mCoord(coor)
+{
+    mChild[0] = mChild[1] = nullptr;
+    mCutCoordinate = cutCoordinate;
 };
 
-template <typename T>
-cNode<T>::~cNode<T>(){
 
+cNode::~cNode(){
 };
 
-template <typename T>
-bool cNode<T>::mIsLeaf(){
-	return (mChild[0] || mChild[1]);
+
+bool cNode::mIsLeaf(){
+    return (mChild[0] || mChild[1]);
 };
 
-template <typename T>
-void cNode<T>::mSetLeftSon(cNode<T>* son){
-	mChild[0] = son;
+
+void cNode::mSetLeftSon(cNode* son){
+    mChild[0] = son;
 };
 
-template <typename T>
-void cNode<T>::mSetRightSon(cNode<T>* son){
-	mChild[1] = son;
+
+void cNode::mSetRightSon(cNode* son){
+    mChild[1] = son;
 };
 
-template <typename T>
-int cNode<T>::mGetCutCoordinateVal(){
-	return mCutCoordinate;
+
+int cNode::mGetCutCoordinateVal(){
+    return mCutCoordinate;
 };
 
-template <typename T>
-void cNode<T>::mSetCutCoordinate(int cutCoordinate){
-	mCutCoordinate = cutCoordinate;
+
+void cNode::mSetCutCoordinate(int cutCoordinate){
+    mCutCoordinate = cutCoordinate;
 };
 
-template <typename T>
-float cNode<T>::mGetCoordinate(int dimension){
-	return mCoord[dimension];
+
+float cNode::mGetCoordinate(int dimension){
+    return mCoord[dimension];
 };
+
+
+cCoordinate cNode::mGetCoordinate(){
+    return mCoord;
+}
+
+
+cNode** cNode::mGetChildDir(bool child){
+    return &(mChild[child]);
+}
+
+
+cNode* cNode::mGetChild(bool child){
+    return (mChild[child]);
+}
+
+
+void cNode::mPrintCoordinates(){
+    mCoord.print();
+}
