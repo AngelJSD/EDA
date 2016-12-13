@@ -63,3 +63,99 @@ void cKDTree::mInsert(cCoordinate coord){
         cout<<"La coordenada ya esta en el árbol"<<endl;
     }
 }
+
+cNode* cKDTree::mMinimum(cNode *A, cNode *B, cNode *C, int dim){
+
+    float min;
+    if(A && B && C){
+        if(A->mGetCoordinate(dim)<B->mGetCoordinate(dim) && A->mGetCoordinate(dim)<C->mGetCoordinate(dim))
+            return A;
+        if(B->mGetCoordinate(dim)<A->mGetCoordinate(dim) && B->mGetCoordinate(dim)<C->mGetCoordinate(dim))
+            return B;
+        if(C->mGetCoordinate(dim)<A->mGetCoordinate(dim) && C->mGetCoordinate(dim)<B->mGetCoordinate(dim))
+            return C;
+    }
+    else if(A && B){
+        if(A->mGetCoordinate(dim)<B->mGetCoordinate(dim))
+            return A;
+        return B;
+    }
+    else if(B && C){
+        if(B->mGetCoordinate(dim)<C->mGetCoordinate(dim))
+            return B;
+        return C;
+    }
+    else if(A && C){
+        if(A->mGetCoordinate(dim)<C->mGetCoordinate(dim))
+            return A;
+        return C;
+    }
+    else if(A){
+        return A;
+    }
+    else if(B){
+        return B;
+    }
+    else if(C){
+        return C;
+    }
+}
+
+cNode* cKDTree::mFindMin(cNode *T, int dim, int cd){
+
+    if(T==NULL) return NULL;
+
+    if(cd==dim){
+
+        if(T->mGetChild(0)==NULL)
+            return T;
+        else
+            return mFindMin(T->mGetChild(0), dim, (cd+1)%mDimensions);
+
+    }
+    else{
+
+        return mMinimum(mFindMin(T->mGetChild(0), dim, (cd+1)%mDimensions),
+                        mFindMin(T->mGetChild(1), dim, (cd+1)%mDimensions),
+                        T, dim);
+
+    }
+}
+
+cNode* cKDTree::mDelete(cCoordinate x, cNode * T, int cd){
+
+    if(T==NULL)
+        cout<<"Error: Punto no encontrado"<<endl;
+
+    int next_cd=(cd+1)%mDimensions;
+
+    if( x==T->mGetCoordinate() ){
+
+        if(T->mGetChild(1) != NULL){
+
+            T->mSetCoordinate(mFindMin(T->mGetChild(1),cd, next_cd)->mGetCoordinate());
+            T->mSetRightSon(mDelete(T->mGetCoordinate(),T->mGetChild(1),next_cd));
+        }
+        else if(T->mGetChild(0) != NULL){
+            T->mSetCoordinate(mFindMin(T->mGetChild(0),cd, next_cd)->mGetCoordinate());
+            T->mSetRightSon(mDelete(T->mGetCoordinate(),T->mGetChild(0),next_cd));
+            T->mSetLeftSon(NULL);
+            cout<<(bool)T->mGetChild(0)<<endl;
+        }
+        else{
+
+            T = NULL;
+        }
+    }
+    else if(x[cd] < T->mGetCoordinate(cd)){
+
+        T->mSetLeftSon(mDelete(x,T->mGetChild(0),next_cd));
+    }
+    else{
+
+        T->mSetRightSon(mDelete(x,T->mGetChild(1),next_cd));
+    }
+
+    return T;
+
+}

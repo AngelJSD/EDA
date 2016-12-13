@@ -77,7 +77,15 @@ int main() {
                     cord.clear();
                 }
                 break;
-            case 3: break;
+            case 3:
+                {
+                    addCoordinates(&cord, dimensions);
+                    cCoordinate cordenadita(cord);
+                    cordenadita.print();
+                    tree.mDelete(cordenadita,tree.mRoot,0);
+                    cord.clear();
+                }
+                break;
             case 4: break;
             case 5: break;
         }

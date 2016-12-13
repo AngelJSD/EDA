@@ -35,6 +35,10 @@ void cNode::mSetCutCoordinate(int cutCoordinate){
     mCutCoordinate = cutCoordinate;
 };
 
+void cNode::mSetCoordinate(cCoordinate Coordinate){
+    mCoord = Coordinate;
+};
+
 
 float cNode::mGetCoordinate(int dimension){
     return mCoord[dimension];

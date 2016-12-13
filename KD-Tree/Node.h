@@ -17,6 +17,7 @@ class cNode{
 		void mSetCutCoordinate(int);
 		float mGetCoordinate(int);
 		cCoordinate mGetCoordinate();
+		void mSetCoordinate(cCoordinate);
 		cNode** mGetChildDir(bool);
 		cNode* mGetChild(bool);
 		void mPrintCoordinates();
