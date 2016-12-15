@@ -86,7 +86,18 @@ int main() {
                     cord.clear();
                 }
                 break;
-            case 4: break;
+            case 4:
+                {
+                    addCoordinates(&cord, dimensions);
+                    cCoordinate cordenadita(cord);
+                    cordenadita.print();
+                    cNode* FNN;
+                    FNN=tree.MFindNearestNeighbor(cordenadita);
+                    cord.clear();
+                    cout<<"FNN: ";
+                    FNN->mPrintCoordinates();
+                }
+                break;
             case 5: break;
         }
         cout<<"-----------------------------Arbol-------------------------"<<endl;
