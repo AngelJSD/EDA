@@ -36,7 +36,7 @@ void cKDTree::print2(cNode* t, int level) {
         cout<<vocabulary[t->mGetCutCoordinateVal()]<<endl;
         for (int k = 0; k < mDimensions*level; k++)
         {
-            cout << "   ";
+            cout << "   "; 
         }
         t->mPrintCoordinates();
         print2(t->mGetChild(0), level+1);
