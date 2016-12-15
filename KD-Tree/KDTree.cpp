@@ -14,6 +14,16 @@ void cKDTree::print() {
     print2(mRoot,0);
 }
 
+float cKDTree::distance(cCoordinate A, cCoordinate B){
+    float dist=0;
+    for(int i=0; i<mDimensions;i++)
+    {
+        dist+=pow(A[i]-B[i],2.0);
+    }
+    dist=sqrt(dist);
+    return dist;
+}
+
 
 void cKDTree::print2(cNode* t, int level) {
     if (t!=NULL)
@@ -121,6 +131,33 @@ cNode* cKDTree::mFindMin(cNode *T, int dim, int cd){
 
     }
 }
+cNode* cKDTree::mFindNearestNeighborAux(cCoordinate coord, cNode** t,cNode* cb,int cd, float dcb){
+
+    if (coord == (*t)->mGetCoordinate())
+    {
+        return *t;
+    }
+    float d=distance(coord, (*t)->mGetCoordinate());
+    if(dcb== -1 || d<dcb)
+    {
+        dcb=d;
+        cb=*t;
+    }
+
+    bool c=(coord[cd] >= (*t)->mGetCoordinate(cd));
+    cNode** p=(*t)->mGetChildDir(c);
+    if (*p==NULL)
+    {
+        return cb;
+    }
+    return mFindNearestNeighborAux(coord,p,cb,(cd+1) % mDimensions, dcb);
+}
+cNode* cKDTree::MFindNearestNeighbor(cCoordinate coord){
+
+    cNode* FNN=   mFindNearestNeighborAux(coord,&mRoot, mRoot,0,-1);
+    return FNN;
+}
+
 
 cNode* cKDTree::mDelete(cCoordinate x, cNode * T, int cd){
 
