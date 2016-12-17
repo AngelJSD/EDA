@@ -54,55 +54,70 @@ int main() {
     while (option<6){
         switch(option){
             case 1: //Insert random
-                cout<<"Ingrese la cantidad de datos a insertar: ";
-                cin>>quantity;
-                for (int i=0;i<quantity;i++)
-                {
+            {
+                cout << "Ingrese la cantidad de datos a insertar: ";
+                cin >> quantity;
+                for (int i = 0; i < quantity; i++) {
                     addCoordinatesRan(&cord, dimensions);
                     cCoordinate cordenadita(cord);
                     cordenadita.print();
                     tree.mInsert(cordenadita);
                     cord.clear();
                 }
+                cout << "-----------------------------Arbol-------------------------" << endl;
+                tree.print();
+                cout << endl;
                 break;
+            }
             case 2: // Insert for console
-                cout<<"Ingrese la cantidad de datos a insertar: ";
-                cin>>quantity;
-                for (int i=0;i<quantity;i++)
-                {
+            {
+                cout << "Ingrese la cantidad de datos a insertar: ";
+                cin >> quantity;
+                for (int i = 0; i < quantity; i++) {
                     addCoordinates(&cord, dimensions);
                     cCoordinate cordenadita(cord);
                     cordenadita.print();
                     tree.mInsert(cordenadita);
                     cord.clear();
                 }
+                cout << "-----------------------------Arbol-------------------------" << endl;
+                tree.print();
+                cout << endl;
                 break;
-            case 3:
-                {
-                    addCoordinates(&cord, dimensions);
-                    cCoordinate cordenadita(cord);
-                    cordenadita.print();
-                    tree.mDelete(cordenadita,tree.mRoot,0);
-                    cord.clear();
-                }
+            }
+            case 3: {
+                addCoordinates(&cord, dimensions);
+                cCoordinate cordenadita(cord);
+                cordenadita.print();
+                tree.mDelete(cordenadita, tree.mRoot, 0);
+                cord.clear();
+
+                cout << "-----------------------------Arbol-------------------------" << endl;
+                tree.print();
+                cout << endl;
                 break;
-            case 4:
-                {
-                    addCoordinates(&cord, dimensions);
-                    cCoordinate cordenadita(cord);
-                    cordenadita.print();
-                    cNode* FNN;
-                    FNN=tree.MFindNearestNeighbor(cordenadita);
-                    cord.clear();
-                    cout<<"FNN: ";
-                    FNN->mPrintCoordinates();
-                }
+            }
+            case 4: {
+                addCoordinates(&cord, dimensions);
+                cCoordinate cordenadita2(cord);
+                cordenadita2.print();
+                cNode *FNN;
+                FNN = tree.MFindNearestNeighbor(cordenadita2);
+                cord.clear();
+                cout << "FNN: ";
+                FNN->mPrintCoordinates();
                 break;
-            case 5: break;
+            }
+            case 5: {
+                cout << "Ingresa la coordenada: ";
+                int coor_search;
+                cin >> coor_search;
+                cNode *min = tree.mFindMin(tree.mRoot, coor_search, 0);
+                cout << "El minino es: ";
+                min->mPrintCoordinates();
+                break;
+            }
         }
-        cout<<"-----------------------------Arbol-------------------------"<<endl;
-        tree.print();
-        cout<<endl;
         menu();
         cin>>option;
     }

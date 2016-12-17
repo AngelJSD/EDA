@@ -1,3 +1,7 @@
 main.o
 *.o
 *.out
+.idea/modules.xml
+.idea/workspace.xml
+cmake-build-debug/
+.idea/EDA.iml
