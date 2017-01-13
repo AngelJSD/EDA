@@ -1,4 +1,4 @@
-#include "Coordinate.h"
+#include "Coordinate.hpp"
 
 cCoordinate::cCoordinate(vector<float> coord){
     mCoordinates = coord;
@@ -34,4 +34,3 @@ void cCoordinate::print()
 float cCoordinate::operator[](int pos){
     return mCoordinates[pos];
 };
-

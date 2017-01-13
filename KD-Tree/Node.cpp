@@ -1,4 +1,4 @@
-#include "Node.h"
+#include "Node.hpp"
 
 cNode::cNode(cCoordinate coor, int cutCoordinate): mCoord(coor)
 {

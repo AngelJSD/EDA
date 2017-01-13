@@ -1,5 +1,5 @@
 #include <iostream>
-#include "KDTree.h"
+#include "KDTree.cpp"
 
 using namespace std;
 
@@ -41,9 +41,10 @@ void menu()
 
 
 int main() {
+	srand(time(NULL));
     cout<<"-------------------------------------KDTree--------------------------------"<<endl;
     int dimensions;
-    cout<<"Ingresa la quantity de dimensiones: ";
+    cout<<"Ingresa la cantidad de dimensiones: ";
     cin>>dimensions;
     cKDTree tree(dimensions);
     int option;
@@ -116,7 +117,9 @@ int main() {
                 cout << "El minino es: ";
                 min->mPrintCoordinates();
                 break;
-            }
+			}
+			default:
+				break;
         }
         menu();
         cin>>option;

@@ -1,4 +1,5 @@
-#include "KDTree.h"
+
+#include "KDTree.hpp"
 
 cKDTree::cKDTree(int dimensions){
     mRoot = nullptr;
@@ -36,7 +37,7 @@ void cKDTree::print2(cNode* t, int level) {
         cout<<vocabulary[t->mGetCutCoordinateVal()]<<endl;
         for (int k = 0; k < mDimensions*level; k++)
         {
-            cout << "   "; 
+            cout << "   ";
         }
         t->mPrintCoordinates();
         print2(t->mGetChild(0), level+1);
@@ -150,7 +151,7 @@ cNode* cKDTree::mFindNearestNeighborAux(cCoordinate coord, cNode** t,cNode* cb,i
     {
         return cb;
     }
-    return mFindNearestNeighborAux(coord,p,cb,(cd+1) % mDimensions, dcb);
+    return mFindNearestNeighborAux(coord, p, cb, (cd+1) % mDimensions, dcb);
 }
 cNode* cKDTree::MFindNearestNeighbor(cCoordinate coord){
 
@@ -161,8 +162,10 @@ cNode* cKDTree::MFindNearestNeighbor(cCoordinate coord){
 
 cNode* cKDTree::mDelete(cCoordinate x, cNode * T, int cd){
 
-    if(T==NULL)
+    if(T==NULL){
         cout<<"Error: Punto no encontrado"<<endl;
+		return NULL;
+	}
 
     int next_cd=(cd+1)%mDimensions;
 

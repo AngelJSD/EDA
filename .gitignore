@@ -1,7 +1,11 @@
 main.o
 *.o
 *.out
+<<<<<<< Updated upstream
 .idea/modules.xml
 .idea/workspace.xml
 cmake-build-debug/
 .idea/EDA.iml
+=======
+*.gch
+>>>>>>> Stashed changes
